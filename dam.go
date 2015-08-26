@@ -1,4 +1,4 @@
-// dam provides a simple method off adding flood protection to an http application.
+// dam provides a simple method of adding flood protection to an http application.
 package dam
 
 import (
