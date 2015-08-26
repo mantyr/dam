@@ -47,7 +47,8 @@ func (dam *Dam) reset() {
 	dam.curChan <- 0
 }
 
-func (dam *Dam) increment() {
+// Increment current rate, used in protect.
+func (dam *Dam) Increment() {
 	current := dam.current + 1
 	dam.curChan <- current
 }
@@ -83,7 +84,7 @@ func (dam *Dam) Protect(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		begin := time.Now()
 		defer func() {
-			go dam.increment()
+			go dam.Increment()
 
 			if dam.Report != nil {
 				dam.Report(time.Since(begin))
